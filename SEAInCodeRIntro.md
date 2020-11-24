@@ -1,7 +1,23 @@
-\#SEAInCodeRIntro
+\#PuttingTheSEAInCode
 ================
 LaTreese Denson
 11/23/2020
+
+  - [Workshop Goals:](#workshop-goals)
+  - [Prerequisits:](#prerequisits)
+  - [Determine, Set, and Create
+    Directories](#determine-set-and-create-directories)
+  - [Install and Load Packages](#install-and-load-packages)
+  - [Data: Load, Explore,Visualize, Analyze, Vizualize again and Export
+    Results](#data-load-explorevisualize-analyze-vizualize-again-and-export-results)
+      - [Load Data](#load-data)
+      - [Explore Data](#explore-data)
+      - [Visualize](#visualize)
+      - [Analyze](#analyze)
+  - [Automation](#automation)
+  - [Functions](#functions)
+  - [For Loops](#for-loops)
+  - [Final ProTips](#final-protips)
 
 ## Workshop Goals:
 
@@ -9,7 +25,7 @@ Determine the influence of two environmental factors on species growth.
 Provide graphs and tables to summarize findings. Create a function to
 automate this analyses.
 
-## Prerequisits;
+## Prerequisits:
 
 You should have [R](https://cran.r-project.org) and
 [Rstudio](https://www.rstudio.com/products/rstudio/) installed. We will
@@ -51,11 +67,15 @@ For example, to get the directory to a specific folder:
 
 To keep things tidy, create another folder specifically for today’s
 workshop. This can be done by creating the object `todays.file` where
-you can change the name whenever you wish.
+you can change the name whenever you wish. You can also make a string of
+file names or whatever you want using `c()`.
 
 ``` r
 todays.file = "SEAInCode"
 ```
+
+You can also make a string of file names or whatever you want using
+`c()`. This will come in handy later.
 
 Use `dir.create()` to make the new folder then set the working directory
 to `todays.file`
@@ -80,9 +100,10 @@ dir()
     ##  [7] "growth_data.csv"          "Labs to pull from"       
     ##  [9] "ModelCoefficeints.csv"    "modeldiagnostics.tiff"   
     ## [11] "MultiRegDataSimulation.R" "SEAInCodeRIntro.docx"    
-    ## [13] "SEAInCodeRIntro.html"     "SEAInCodeRIntro.Rmd"     
-    ## [15] "testworddoc.docx"         "testworddoc.log"         
-    ## [17] "testworddoc.Rmd"          "testworddoc.tex"
+    ## [13] "SEAInCodeRIntro.md"       "SEAInCodeRIntro.Rmd"     
+    ## [15] "SEAInCodeRIntro_files"    "testworddoc.docx"        
+    ## [17] "testworddoc.log"          "testworddoc.Rmd"         
+    ## [19] "testworddoc.tex"
 
 **ProTip:** Messed up? Want to move up one directory? No problem\! Run
 `setwd("..")`.
@@ -102,7 +123,6 @@ decided to bundle these packages and a few others in what is called the
 **tidyverse:** the data analysis super package\!
 
 ``` r
-# All necessary packages can be installed using this line
 install.packages("tidyverse")
 ```
 
@@ -111,13 +131,9 @@ install.packages("tidyverse")
 Load the package every time a new R session is started using
 `library()`.
 
-``` r
-library(tidyverse)
-```
-
     ## Warning: package 'tidyverse' was built under R version 4.0.3
 
-    ## -- Attaching packages ----------------------------------------------------- tidyverse 1.3.0 --
+    ## -- Attaching packages ------------------------------------------------ tidyverse 1.3.0 --
 
     ## v ggplot2 3.3.2     v purrr   0.3.4
     ## v tibble  3.0.3     v dplyr   1.0.2
@@ -140,7 +156,7 @@ library(tidyverse)
 
     ## Warning: package 'forcats' was built under R version 4.0.3
 
-    ## -- Conflicts -------------------------------------------------------- tidyverse_conflicts() --
+    ## -- Conflicts --------------------------------------------------- tidyverse_conflicts() --
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -282,7 +298,10 @@ summary(Species_A_Clean)
 ## Visualize
 
 Let’s do a boxplot of our response vs. our explanatory variables. Here
-we are using ggplot2 but I also provide code for using base R.
+we are using ggplot2 but I also provide code for using Base R. You will
+notice that I have commented out some lines of code using ‘\#’. This
+allows me to block out lines that I don’t want to run as well as create
+comments.
 
 ``` r
 ggplot(Species_A_Clean, aes(x=as.factor(light_hrs), y=growth)) + 
@@ -292,12 +311,11 @@ ggplot(Species_A_Clean, aes(x=as.factor(light_hrs), y=growth)) +
 ![](SEAInCodeRIntro_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
 ``` r
-ggsave("boxplot_light.tiff")
-```
+# To save to a file for viewing later we use the function ggsave()
+# The .tiff is the type of file, you can also use jpg
+# .tiff files are good for publication graphics
+# ggsave("boxplot_light.tiff")
 
-    ## Saving 7 x 5 in image
-
-``` r
 ggplot(Species_A_Clean, aes(x=as.factor(temp_range), y=growth)) + 
   geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("temp")
 ```
@@ -305,19 +323,20 @@ ggplot(Species_A_Clean, aes(x=as.factor(temp_range), y=growth)) +
 ![](SEAInCodeRIntro_files/figure-gfm/unnamed-chunk-14-2.png)<!-- -->
 
 ``` r
-ggsave("boxplot_temp.tiff")
-```
+# ggsave("boxplot_temp.tiff")
 
-    ## Saving 7 x 5 in image
-
-``` r
-# Base R
+# Here is the code to create a boxplot and save it in Base R
+# Remove the # to run these 3 lines
 # tiff("boxplot.tiff")
-# boxplot(growth~temp_range,data=Species_A_Clean,xlab="temp_range", ylab="growth(wt") 
-# dev.off()
+# boxplot(growth~temp_range,data=Species_A_Clean,xlab="temp_range", ylab="growth(wt")
+# dev.off() 
 ```
 
-Attempt a histogram of the data using the `geom_histogram()` function.
+Notice the way we save graphics is different depending on the package we
+are using. Also `dev.off()` closes all graphics devices so you can start
+a fresh graph next time.
+
+Create a histogram of the data using the `geom_histogram()` function.
 Change the `binwidth` to see what happens.
 
 ``` r
@@ -328,12 +347,10 @@ ggplot(Species_A_Clean, aes(x = growth)) +
 ![](SEAInCodeRIntro_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 ``` r
-ggsave("DataDistribution.tiff")
-```
+# You can remove the '#' in the line below if you want to save this
+# ggsave("DataDistribution.tiff") 
 
-    ## Saving 7 x 5 in image
 
-``` r
 # Base R
 # hist(Species_A_Clean$growth, breaks=1, col="darkgrey", main = "", xlab="growth") 
 ```
@@ -371,40 +388,49 @@ sum.mod = summary(SpeciesA.lm)
 # residuals(fit) # residuals
 # anova(fit) # anova table 
 ####
+```
 
+Here you have your important outputs to make a conclusion with.
+
+Let’s save some of that information to an excel file. Note: you cannot
+save the entire output to a csv using the lines below. You may need some
+other functions.
+
+``` r
 results = sum.mod$coefficients
 
 out = as.data.frame(results)
 
-write.csv(out,"ModelCoefficeints.csv")
+write.csv(out,"ModelCoefficeints.csv") # this is an excel file you can also write to a text file using write.table() and .txt file name instead of csv
 ```
-
-From our results we can conclude that for every XXX increase in density,
-this species specific growth decreases by 1 gram.
 
 Let’s plot this relationship and some diagnostics of the fit to the
 model.
 
 ``` r
-# tiff("ModelDiagnostics.tiff") # Create the graphic
-# par(mfrow=c(2,2)) # set up how we want them to be plotted: 2 rows 2 columns
+# tiff("ModelDiagnostics.tiff") # Remember you can save this graphic
+par(mfrow=c(2,2)) # set up how we want them to be plotted: 2 rows 2 columns
 plot(SpeciesA.lm)
 ```
 
-![](SEAInCodeRIntro_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->![](SEAInCodeRIntro_files/figure-gfm/unnamed-chunk-18-2.png)<!-- -->![](SEAInCodeRIntro_files/figure-gfm/unnamed-chunk-18-3.png)<!-- -->![](SEAInCodeRIntro_files/figure-gfm/unnamed-chunk-18-4.png)<!-- -->
+![](SEAInCodeRIntro_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
 
 ``` r
-#dev.off()  # close the plotting window
+dev.off()  # close the plotting window and resets things
 ```
+
+    ## null device 
+    ##           1
 
 This produces 4 main plots each used to diagnose the fit of the model to
 the data.
 
-## Automation
+# Automation
 
 Let’ say you now need to do this for the two other species, nobody wants
-to write all that code out again. So now we will build our own function
-and if there is time we will loop through the species.
+to write all that code out again. Now we will build our own function and
+if there is time we will loop through and analyze the data for all of
+the species with the click of a button.
 
 # Functions
 
@@ -434,16 +460,16 @@ func.name = function(arg1,arg2)
 ```
 
 Let’s do the following in a function: 1. Select the species of interest
-2. Produce plots exploring the response vs the explanatory variables 3.
-Produce plots of the data distribution 4. Fit the full linear model and
-export a table 5. Plot the diagnostics
+2. Produce plots exploring the response vs the explanatory variables 4.
+Fit the full linear model and export a table 5. Plot the diagnostics
 
 ``` r
 do.analysis = function(species.name = "B", input.data = data)
 {
+  # Use piping to select the data related to the species of choice in the first argument
   species.data = input.data %>% filter(species == species.name)
   
-  # put the boxplot stuff here
+# Create boxplots and save them for publication
   ggplot(species.data, aes(x=as.factor(light_hrs), y=growth)) + 
     geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("light_hours")
   ggsave("boxplot_light.tiff")
@@ -452,21 +478,20 @@ do.analysis = function(species.name = "B", input.data = data)
   geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("temp")
   ggsave("boxplot_temp.tiff")
   
+  # Fit the model and save some of the results
   final.mod = lm(growth~light_hrs+temp_range,data = species.data)
-  
   sum.mod = summary(final.mod)
-  
   results = sum.mod$coefficients
-  
   out = as.data.frame(results)
-  
   write.csv(out,"ModelCoefficeints.csv")
   
+  # Plot and save the diagnostics
   tiff("modeldiagnostics.tiff")
   par(mfrow=c(2,2))
   plot(final.mod)
   dev.off()
   
+  # use cat() to print a message when you are done with your analyses
   cat(paste("\nmodel outputs for species",species.name,"are complete!\n"))
 }
 
@@ -483,12 +508,62 @@ do.analysis("A",data)
     ## 
     ## model outputs for species A are complete!
 
-# Loops
+# For Loops
 
-Create a vector of species names and perform the function on each
-species by looping the execution of our function
+There are various types of loops but “for” loops are most common. You
+use loops when you want to do something iteratively. For loops have the
+following structure:
 
-    ## Warning in dir.create(current.species): 'A' already exists
+``` r
+for (i in 0:5) # a variable and range of values it will take
+  { # a bracket to start
+   
+  #some calculation or function to do something
+  
+  } # a bracket to end the for loop
+```
+
+Here “i” sequentially becomes a number from 0 to 5 and is used in each
+iteration of the loop.
+
+Let’s try a simple example where we want to add i to 5. Our output
+should consist of a list of values. We’ll use the `cat()` function so we
+can see what the loop is doing.
+
+``` r
+for (i in 0:5) 
+  {
+  x = i + 5 # Do something to i, iteratively
+  
+  cat(x) # see what happens if you take this out
+  
+  # I like to print what I am doing inside of a loop ... 
+  # uncomment the next line to see what it does
+  
+  # cat(paste("i= ", i, "and i + 5 =", x,"\n")) 
+  
+  } # end for loop
+```
+
+    ## 5678910
+
+**Now for the ultimate test** Use what we have learned so far to perform
+the analyses function on each species by using a loop.
+
+``` r
+species.list = c("A","B","C") # vector of species names to loop through
+
+for (i.species in 1:length(species.list))
+{
+  # i.species = 1 # test to see if your loop is working, it should change the current.species object
+  current.species = species.list[i.species] # good practice to set an object name once and use it in multiple places
+  dir.create(current.species) # create a new folder to work in or else things will overwrite because they have the same name
+  setwd(current.species) # work in the newly created directory
+  dir()
+  do.analysis(current.species,data) # use the function we created previously
+  setwd("..") # move back to the main folder to restart the loop
+}
+```
 
     ## Saving 7 x 5 in image
     ## Saving 7 x 5 in image
@@ -499,8 +574,6 @@ species by looping the execution of our function
     ## 
     ## model outputs for species A are complete!
 
-    ## Warning in dir.create(current.species): 'B' already exists
-
     ## Saving 7 x 5 in image
 
     ## Saving 7 x 5 in image
@@ -510,8 +583,6 @@ species by looping the execution of our function
 
     ## 
     ## model outputs for species B are complete!
-
-    ## Warning in dir.create(current.species): 'C' already exists
 
     ## Saving 7 x 5 in image
 
