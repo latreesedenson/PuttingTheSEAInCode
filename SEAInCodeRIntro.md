@@ -21,9 +21,10 @@ LaTreese Denson
 
 ## Workshop Goals:
 
-Determine the influence of two environmental factors on species growth.
-Provide graphs and tables to summarize findings. Create a function to
-automate this analyses.
+  - Determine the influence of two environmental factors on species
+    growth.
+  - Provide graphs and tables to summarize findings.
+  - Create a function to automate this analyses.
 
 ## Prerequisits:
 
@@ -100,10 +101,10 @@ dir()
     ##  [7] "growth_data.csv"          "Labs to pull from"       
     ##  [9] "ModelCoefficeints.csv"    "modeldiagnostics.tiff"   
     ## [11] "MultiRegDataSimulation.R" "SEAInCodeRIntro.docx"    
-    ## [13] "SEAInCodeRIntro.md"       "SEAInCodeRIntro.Rmd"     
-    ## [15] "SEAInCodeRIntro_files"    "testworddoc.docx"        
-    ## [17] "testworddoc.log"          "testworddoc.Rmd"         
-    ## [19] "testworddoc.tex"
+    ## [13] "SEAInCodeRIntro.html"     "SEAInCodeRIntro.md"      
+    ## [15] "SEAInCodeRIntro.Rmd"      "SEAInCodeRIntro_files"   
+    ## [17] "testworddoc.docx"         "testworddoc.log"         
+    ## [19] "testworddoc.Rmd"          "testworddoc.tex"
 
 **ProTip:** Messed up? Want to move up one directory? No problem\! Run
 `setwd("..")`.
