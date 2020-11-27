@@ -7,7 +7,6 @@ output:
     toc_float: true
     toc: true
     toc_depth: 2
-    theme: jekyll-theme-slate
 ---
 
 ```{r setup, include=FALSE}
