@@ -1,0 +1,10 @@
+name: "New Stuff"
+navbar:
+  title: "HOME"
+  left:
+    - text: "Workshop Code"
+      href: SEAInCodeRIntro.html
+output_dir: "."
+output:
+  html_document:
+    theme: jekyll-theme-slate
