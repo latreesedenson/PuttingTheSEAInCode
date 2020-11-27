@@ -1,7 +1,7 @@
 ---
-title: '#PuttingTheSEAInCode'
-author: "LaTreese Denson"
-date: "11/23/2020"
+title: 'PuttingTheSEAInCode'
+author: "Chante Davis & LaTreese Denson"
+date: "12/04/2020"
 output: 
   html_document:
     toc_float: true
