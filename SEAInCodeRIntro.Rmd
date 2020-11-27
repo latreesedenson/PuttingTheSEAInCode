@@ -1,6 +1,6 @@
 ---
 title: 'PuttingTheSEAInCode'
-author: "Chante Davis & LaTreese Denson"
+author: "Chante Davis PhD & LaTreese Denson"
 date: "12/04/2020"
 output: 
   html_document:
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Prerequisits:
 You should have [R](https://cran.r-project.org) and [Rstudio](https://www.rstudio.com/products/rstudio/) installed. We will be working with R within the Rstudio environment.
 
-# Determine, Set, and Create Directories
+# R script Setup
 Determine which directory you are in:
 ```{r, echo = TRUE}
 getwd()
@@ -34,7 +34,7 @@ Not the right directory? That's fine--let's change it!
   
 To change or set the directory in R use the `setwd()` function. 
 ```{r, eval=FALSE}
-# The file path for your desktop
+# Set the file path for your desktop
 setwd("/Users/Me/Desktop")
 ```
 **Note:** In this character string, you can only use a "/" or "\\\\" between folder names. 
@@ -81,7 +81,7 @@ install.packages("tidyverse")
 **Note:** Installing the package only needs to be done once.
 
 Load the package every time a new R session is started using `library()`.
-```{r, echo = FALSE}
+```{r, warning=FALSE}
 library(tidyverse)
 ```
 **Note:** If you are ever wondering how to use these packages check out the cheat sheets:
@@ -92,15 +92,15 @@ library(tidyverse)
 
 ... or **Google it**!
 
-# Data: Load, Explore,Visualize, Analyze, Vizualize again and Export Results
+# Data Exploration
 
 ## Load Data
-Read in the [growth_data](https://raw.githubusercontent.com/latreesedenson/SEAinCode/main/growth_data.csv) from Github using `read.csv()` and give it the object name "data":
+Read in the [growth_data](https://raw.githubusercontent.com/latreesedenson/SEAinCode/main/growth_data.csv) from Github using `read.csv()` and give it the object name "data" using `=` or `->` as the assignment operator:
 
 ```{r}
 data = read.csv("https://raw.githubusercontent.com/latreesedenson/SEAinCode/main/growth_data.csv")
 
-data=as.data.frame(data)
+data = as.data.frame(data)
 ```
 **Note:** You could also copy and paste the data from the web browser into an excel file, change the format to comma delimited, saved it as a csv file and then read it in using `read.csv()`. That way you would have a copy of the data on your local drive.
 
@@ -132,7 +132,7 @@ You will notice there are multiple species here and some NAs in the data. Let's 
 We will use the pipe operator `%>%` from the magrittr package within the tidyverse package to do this. This syntax leads to code that is easier to write and to read. Use the keyboard shortcut: Ctrl + Shift + M (Windows) or Cmd + Shift + M (Mac) to get the pipe operator.
 
 ```{r}
-Species_A_Clean = data %>% filter(species =="A",!is.na(light_hrs))
+Species_A_Clean = data %>% filter(species =="A",!is.na(temp_range))
 
 head(Species_A_Clean)
 dim(Species_A_Clean)
@@ -141,16 +141,16 @@ summary(Species_A_Clean)
 
 
 ## Visualize
-Let's do a boxplot of our response vs. our explanatory variables. Here we are using ggplot2 but I also provide code for using Base R.
-You will notice that I have commented out some lines of code using '#'. This allows me to block out lines that I don't want to run as well as create comments.
+Let's do a boxplot of our response vs. our explanatory variables. Here we are using the ggplot2 package, but I also provide code for using Base R.
+You will notice that I have commented out some lines of code using '#'. This allows me to block out lines that I don't want to run, as well as create comments for my code.
 ```{r, echo=TRUE}
-ggplot(Species_A_Clean, aes(x=as.factor(light_hrs), y=growth)) + 
-  geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("light_hours")
+ggplot(Species_A_Clean, aes(x=as.factor(daylength), y=growth)) + 
+  geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("day length")
 
 # To save to a file for viewing later we use the function ggsave()
-# The .tiff is the type of file, you can also use jpg
+# The .tiff extension is the type of file, you can also use .jpg
 # .tiff files are good for publication graphics
-# ggsave("boxplot_light.tiff")
+# ggsave("boxplot_daylength.tiff")
 
 ggplot(Species_A_Clean, aes(x=as.factor(temp_range), y=growth)) + 
   geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("temp")
@@ -173,7 +173,6 @@ ggplot(Species_A_Clean, aes(x = growth)) +
 # You can remove the '#' in the line below if you want to save this
 # ggsave("DataDistribution.tiff") 
 
-
 # Base R
 # hist(Species_A_Clean$growth, breaks=1, col="darkgrey", main = "", xlab="growth") 
 ```
@@ -188,13 +187,17 @@ lm(y ~ x1 + x2 + x3, Data = Data)
 ```
 Let's run a model with our species data. We tell R that we have a categorical factor with multiple levels such as diet quality by using the function `factor()`.
 ```{r}
-SpeciesA.lm = lm(growth ~ factor(light_hrs)*factor(temp_range), data = Species_A_Clean)
+SpeciesA.lm = lm(growth ~ factor(daylength)*factor(temp_range), data = Species_A_Clean)
 ```
 
 To get a summary of the linear model output we use the function `summary()`.
 ```{r}
 
-sum.mod = summary(SpeciesA.lm)
+sum.mod = summary(SpeciesA.lm) 
+# since sum.mod is an object 
+# we will need to run the next line to see what is in it
+
+sum.mod
 
 ####
 # Additional functions you may find useful in the future
@@ -214,7 +217,7 @@ results = sum.mod$coefficients
 
 out = as.data.frame(results)
 
-write.csv(out,"ModelCoefficeints.csv") # this is an excel file you can also write to a text file using write.table() and .txt file name instead of csv
+write.csv(out,"ModelCoefficients.csv") # this is an excel file you can also write to a text file using write.table() and .txt file name instead of csv
 
 ```
 
@@ -264,16 +267,16 @@ do.analysis = function(species.name = "B", input.data = data)
   species.data = input.data %>% filter(species == species.name)
   
 # Create boxplots and save them for publication
-  ggplot(species.data, aes(x=as.factor(light_hrs), y=growth)) + 
-    geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("light_hours")
-  ggsave("boxplot_light.tiff")
+  ggplot(species.data, aes(x=as.factor(daylength), y=growth)) + 
+    geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("daylength")
+  ggsave("boxplot_daylength.tiff")
   
   ggplot(species.data, aes(x=as.factor(temp_range), y=growth))+
   geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("temp")
   ggsave("boxplot_temp.tiff")
   
   # Fit the model and save some of the results
-  final.mod = lm(growth~light_hrs+temp_range,data = species.data)
+  final.mod = lm(growth~daylength+temp_range,data = species.data)
   sum.mod = summary(final.mod)
   results = sum.mod$coefficients
   out = as.data.frame(results)
