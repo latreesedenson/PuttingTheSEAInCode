@@ -3,6 +3,6 @@ This repository holds the materials for the [#BlackInMarineScience](https://blac
 
 If you have not done so already please download [R](https://cran.r-project.org/mirrors.html) and [Rstudio](https://www.rstudio.com/products/rstudio/).
 
-Follow along using the instructions [here](SEAInCodeRIntro.html).
+Follow along using the instructions [here](SEAInCodeRIntro2.html).
 
 
