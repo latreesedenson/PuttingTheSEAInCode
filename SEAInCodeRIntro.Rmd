@@ -4,6 +4,7 @@ author: "LaTreese Denson"
 date: "11/23/2020"
 output: 
   html_document:
+    toc_float: true
     toc: true
     toc_depth: 2
 
