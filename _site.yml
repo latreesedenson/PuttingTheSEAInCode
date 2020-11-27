@@ -1,4 +1,4 @@
-name: "R Markdown Websites Tutorial"
+name: "New Stuff"
 navbar:
   title: "HOME"
   left:
@@ -8,6 +8,3 @@ output_dir: "."
 output:
   html_document:
     theme: jekyll-theme-slate
-    highlight: textmate
-#    include:
-#      after_body: _footer.html
