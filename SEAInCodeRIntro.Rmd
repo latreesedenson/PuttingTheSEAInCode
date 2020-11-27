@@ -5,6 +5,7 @@ date: "11/23/2020"
 output: 
   rmarkdown::html_document:
     toc: true
+    toc_float: true
     toc_depth: 2
 
 ---
