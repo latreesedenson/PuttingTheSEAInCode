@@ -3,7 +3,7 @@ navbar:
   title: "HOME"
   left:
     - text: "Workshop Code"
-      href: SEAInCodeRIntro.html
+      href: SEAInCodeRIntro2.html
 output_dir: "."
 output:
   html_document:
