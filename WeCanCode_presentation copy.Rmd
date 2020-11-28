@@ -1,100 +1,87 @@
 ---
-title: "WeCanCode"
+title: "PuttingTheSEAinCode"
 author: "Chante Davis PhD and LaTreese Denson"
 date: "11/16/2020"
-output:
-  ioslides_presentation: default
-  slidy_presentation: default
-widescreen: no
+output: ioslides_presentation
+widescreen: false  
+   
 ---
 
+## Doing more with R
+<br>
+<div class = "blue">
+* What is R  
+* Installing R  
+* More than data  
+* Resources for learning R  
+* Lets code a little
 
-## Many uses for R beyond the analysis of data 
-
-<!--This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. -->
-
-<!--When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. -->
-
-## The what and why of R
-
-R is a language: concepts apply to all coding/automation
-   
-   
-   ~ a set of instructions to complete tasks
-   
-```{r, out.width = "50%", echo=FALSE}
+```{r, out.width = "40%", echo=FALSE}
 knitr::include_graphics("HowIFeelWhenCodeWorks.jpg")
 ```
+</div></b>
+</font>
 
+## The what and why of R
+<font size="5.5">
+R is a popular language: concepts apply to all coding/automation
+  <div class = "blue">
+   * a set of instructions to complete tasks  
+   * FREE!  
+   * Packages for many actions:  
+       - Data processing and Visualization  
+       - Slides for presentations  
+       - Text for articles, memos, reports  
+       - Websites
+       - Interactive plots, maps
+       - Relational database querries
+        
+</div></b>
+</font>
+
+## Many uses for R beyond the analysis of data 
+<br>
+* Install R: [here] (https://cran.rstudio.com/)
+
+* Install RStudio:[here] (https://www.rstudio.com/products/rstudio/hownload/)
+
+<div class="centered"><b>
+```{r, out.width = "60%", figure.height = "60%", out.extra='style="background-color: #0055A4; padding:2px;"', echo = FALSE}
+
+knitr::include_graphics("Rstudio.png")
+
+```
+
+</div></b>
+</font>
 
 ## The what and why of R
 
 <br>
 <font size="6.5">Why code? I'm not running fancy models...  
  
- <div class="centered"><b>
-  - Efficiency
-
- -- Accuracy
-
- -- Reproducibility
+<div class ="centered"><div class = "blue"><b>
+* Efficiency  
+* Accuracy   
+* Reproducibility  
 
 </div></b>
  </font>
- 
 
-## The what and why of R
-
-<br>
-<font size="6.5">Why code? I'm getting by with Excell or other database...  
- 
- <div class="centered"><b>
-  - Efficiency
-
- -- Accuracy
-
- -- Reproducibility
-
-</div></b>
- </font>
- 
- 
-## Improving your Effeciency on repetitive tasks
+## Improving Effeciency on repetitive tasks
 <br>
 <div class="centered">
 ```{r, out.width = "70%", figure.height = "60%", out.extra='style="background-color: #0055A4; padding:2px;"', echo = FALSE}
 
 knitr::include_graphics("repetative task chart.png")
 
-
 ```
-
-
-## May different types of products
-```{r, out.width = "350px", echo= FALSE, out.extra='style="background-color: #0055A4; padding:2px; display: inline-block;"'}
-#knitr::include_graphics("C:/Users/chante.davis/Documents/Coding/WeCanCode/tableCapture.PNG")
-```
-&nbsp;
-```{r, out.width = "400px", echo= FALSE, out.extra='style="background-color: #0055A4; padding:2px; display: inline-block;"'}
-knitr::include_graphics("ArticleScreenShot.PNG")
-```
-<br>
-<div class="centered">
-```{r, out.width = "600px", out.extra='style="background-color: #0055A4; padding:2px; display: inline-block;"' , echo= FALSE}
-#knitr::include_graphics("C:/Users/chante.davis/Documents/Coding/WeCanCode/excelCapture.PNG")
-```
-</div>
-
-
 
 </div>
 ## Effect of Day Length on Species Growth
-
 ```{r echo = F, warning = FALSE}
 data = read.csv("https://raw.githubusercontent.com/latreesedenson/SEAinCode/main/growth_data.csv")
-
 data = as.data.frame(data)
-
 do.analysis = function(species.name = "B", input.data = data)
 {
   species.data = input.data[input.data$species == species.name,]
@@ -107,8 +94,9 @@ do.analysis = function(species.name = "B", input.data = data)
     ggtitle(paste0("Effect of Daylength on Species ",species.name))+ylab("Growth (wt)")+ xlab("Day Length Category") +theme(plot.title = element_text(hjust = 0.5))
 }
 
+
 # Just change the species name here: A, B, or C.
-do.analysis("B",data)
+do.analysis("C",data)
 ```
 
 ## The 'meta' moment
@@ -137,8 +125,21 @@ knitr::include_graphics("OurCodingClubCapture.PNG")
 
 [Our Coding Club ](https://ourcodingclub.github.io/)
 
+
+## Skill building
+
+An introduction to R [here](https://cran.r-project.org/doc/manuals/r-release-R-intro.pdf)
+
+R for Data Science [here](http://r4ds.had.co.nz/)
+
+RStudio Cheat Sheets [here](https://www.rstudio.com/resources/cheatsheets/)
+
 [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday)
 
 [StackOverflow](https://stackoverflow.com/questions/tagged/r)
+
+
+## Lets Code!
+
 
 </div>
