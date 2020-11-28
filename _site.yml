@@ -5,7 +5,7 @@ navbar:
     - text: "Workshop Code"
       href: SEAInCodeRIntro2.html
     - text: "Workshop Slides"
-      href: WeCanCode_presentation.html
+      href: WeCanCode_presentation copy.html
 output_dir: "."
 output:
   html_document:
