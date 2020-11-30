@@ -7,4 +7,6 @@ You can find the introduction slides [here](WeCanCode_presentation_copy.html)
 
 Then follow along using the instructions [here](SEAInCodeRIntro2.html).
 
+If you have any questions feel free to email us: latreese.denson@gmail.com & davis.chanted@gmail.com
+
 
