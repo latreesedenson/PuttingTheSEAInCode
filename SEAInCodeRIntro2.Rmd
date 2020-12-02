@@ -16,13 +16,19 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Workshop Goals:
 - Determine the influence of two environmental factors on species growth. 
 - Provide graphs and tables to summarize findings.
-- Create a function to automate this analyses.
+- Create a function to automate your analyses.
 
 ## Prerequisits:
-You should have [R](https://cran.r-project.org) and [Rstudio](https://www.rstudio.com/products/rstudio/) installed. We will be working with R within the Rstudio environment.
+You should have [R](https://cran.r-project.org) and [Rstudio](https://www.rstudio.com/products/rstudio/) installed. We will be working with R within the Rstudio application.
 
 # R script Setup
-Determine which directory you are in:
+Start a new script by going to File --> New File --> R Script
+![NewScript](NewScript.png)
+
+Become familiar with the R studio layout:
+![Rstudio Layout](RstudioAnnotated.png)
+
+Determine which directory you are in. The results of your code will print to the console:
 ```{r, echo = TRUE}
 getwd()
 ```
@@ -33,27 +39,29 @@ Not the right directory? That's fine--let's change it!
   
 To change or set the directory in R use the `setwd()` function. 
 ```{r, eval=FALSE}
-# Set the file path for your desktop
-setwd("/Users/Me/Desktop")
+# Set the file path to YOUR desktop
+setwd("/Users/YourName/Desktop")
 ```
 **Note:** In this character string, you can only use a "/" or "\\\\" between folder names. 
 
-For example, to get the directory to a specific folder:
+For example, to set the directory to a specific folder:
 
 1. From your desktop or start menu, navigate to the folder you wish to save in, and open it.
 2. Right-click in any empty space inside the folder, select properties.
 3. Select and copy the location (e.g., "C:\\\\Users\\\\Me\\\\Desktop").
 4. Paste the location name inside the `setwd()` parentheses and add your folder name (e.g.,"\\\\SpecificFolder").
 
-To keep things tidy, create another folder specifically for today's workshop. This can be done by creating the object `todays.file` where you can change the name whenever you wish. You can also make a string of file names or whatever you want using `c()`. 
+To keep things tidy, create another folder specifically for today's workshop. This can be done by creating the object `todays.file` where you can change the name whenever you wish. 
 ```{r}
 todays.file = "SEAInCode"
 ```
-You can also make a string of file names or whatever you want using `c()`. This will come in handy later.
+You can also make a string of file names or characters representing other objects using `c()`. This will come in handy later in the workshop.
 
 Use `dir.create()` to make the new folder then set the working directory to `todays.file`
 ```{r, eval = FALSE}
 dir.create(todays.file)
+# If you try to create a folder that already exists R will let you know
+
 setwd(todays.file)
 ```
 **ProTip:** R does not like spaces. Use underscores instead.
@@ -62,7 +70,9 @@ Check to see if you are in the right place using `getwd()`, then use the functio
 ```{r}
 dir()
 ```
-**ProTip:** Messed up? Want to move up one directory? No problem! Run `setwd("..")`.
+**ProTip:** There will be nothing in your directory if you created a new folder to work in. Messed up? Want to move up one directory? No problem! Run `setwd("..")` to move up a folder level.
+
+Now save your script. R will often hold your place but it is good to save periodically. When you close Rstudio it will ask if you want to save your R space. This will save everything in the global environment. I tend not to save it since I probably saved all of the output I needed before deciding to close R. 
 
 # Install and Load Packages
 
@@ -79,7 +89,7 @@ install.packages("tidyverse")
 ```
 **Note:** Installing the package only needs to be done once.
 
-Load the package every time a new R session is started using `library()`.
+Load the package every time a new R session is started using `library()`. The messages that show up are OK. You should only be concerned if `warnings` or `Error` pops up.
 ```{r, warning=FALSE}
 library(tidyverse)
 ```
@@ -101,12 +111,14 @@ data = read.csv("https://raw.githubusercontent.com/latreesedenson/SEAinCode/main
 
 data = as.data.frame(data)
 ```
-**Note:** You could also copy and paste the data from the web browser into an excel file, change the format to comma delimited, saved it as a csv file and then read it in using `read.csv()`. That way you would have a copy of the data on your local drive.
+**Note:** You could also copy and paste the data from the web browser into an excel file, change the format to comma delimited, saved it as a csv file and then read it in using `read.csv()`. This way you would have a copy of the data on your local drive to read from. You would need to replace the weblink with the path to the data on your local computer.
 
 ## Explore Data
-Make sure the data was read in correctly using the function `head()`. 
+Make sure the data was read in correctly using the function `head()`. And look at parts of the data using the `$` operator. 
 ```{r}
 head(data)
+
+data$temp_range
 ```
 **ProTip:** Not sure what a function does? Type `?head()` into the console and see what pops up in the help menu. Scroll down to the bottom--there are often examples of how to use the function that you can practice with.
 
@@ -121,14 +133,14 @@ dim(data)
 ```
 
 
-Let's get some basic summary statistics from our data:minimum, maximum and mean.
+Let's get some basic summary statistics from our data: minimums, maximums and means.
 ```{r}
 summary(data)
 ```
 
 
-You will notice there are multiple species here and some NAs in the data. Let's work with the first species and remove the bad records.
-We will use the pipe operator `%>%` from the magrittr package within the tidyverse package to do this. This syntax leads to code that is easier to write and to read. Use the keyboard shortcut: Ctrl + Shift + M (Windows) or Cmd + Shift + M (Mac) to get the pipe operator.
+You will notice that there were multiple species here and some NAs in the data. Let's work with the first species and remove the bad records.
+We will use the pipe operator `%>%` from the magrittr package within the tidyverse to do this. This syntax leads to code that is easier to write and to read. Use the keyboard shortcut: Ctrl + Shift + M (Windows) or Cmd + Shift + M (Mac) to get the pipe operator.
 
 ```{r}
 Species_A_Clean = data %>% filter(species =="A",!is.na(temp_range))
@@ -138,11 +150,21 @@ dim(Species_A_Clean)
 summary(Species_A_Clean)
 ```
 
+Notice that there are no more NAs in the temp_range summary.
+```{r}
+Species_A_Clean$temp_range
+```
 
 ## Visualize
 Let's do a boxplot of our response vs. our explanatory variables. Here we are using the ggplot2 package, but I also provide code for using Base R.
-You will notice that I have commented out some lines of code using '#'. This allows me to block out lines that I don't want to run, as well as create comments for my code.
+
+ggplot can get a bit complex depending on what you want to do but the basic components are typically the same. 
+
+You will notice that I have commented out some lines of code using '#'. This allows me to block out lines that I don't want to run, as well as create comments for a better explanation of my code. 
+
 ```{r, echo=TRUE}
+# ggplot general inputs/arguments (data, aesthetics - x and y) + plot type + etc.
+
 ggplot(Species_A_Clean, aes(x=as.factor(daylength), y=growth)) + 
   geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("day length")
 
@@ -151,6 +173,8 @@ ggplot(Species_A_Clean, aes(x=as.factor(daylength), y=growth)) +
 # .tiff files are good for publication graphics
 # ggsave("boxplot_daylength.tiff")
 
+
+# Change the x variable to graph a different explanatory variable
 ggplot(Species_A_Clean, aes(x=as.factor(temp_range), y=growth)) + 
   geom_boxplot(fill="slateblue", alpha=0.2) +  xlab("temp")
 
@@ -178,13 +202,15 @@ ggplot(Species_A_Clean, aes(x = growth)) +
 
 
 ## Analyze
-We use the `lm()` function which needs model and the data as it's input. The model is setup using a $\sim$, where $y\sim x$ means that Y is a function of X.
+Let's fit a basic linear model to the data, to determine the impact of day length and temperature  on species growth.
+
+We use the `lm()` function which needs model and the data as it's input. The model is setup using a $\sim$, where $y\sim x$ means that Y is a function of a series of Xs.
 
 ```r
 lm(y ~ x1 + x2 + x3, Data = Data)
 
 ```
-Let's run a model with our species data. We tell R that we have a categorical factor with multiple levels such as diet quality by using the function `factor()`.
+Let's run a model with our species data. We tell R that we have factors with multiple levels by using the function `factor()`. If you had a continuous variable you wouldn't need this added piece.
 ```{r}
 SpeciesA.lm = lm(growth ~ factor(daylength)*factor(temp_range), data = Species_A_Clean)
 ```
@@ -208,35 +234,53 @@ sum.mod
 # anova(fit) # anova table 
 ####
 ```
-Here you have your important outputs to make a conclusion with.
+Here you have your important outputs to make a conclusion with (pvalues, coefficients, etc.).
 
-Let's save some of that information to an excel file. Note: you cannot save the entire output to a csv using the lines below. You may need some other functions.
+Let's save some of that information to an excel file. Note: you cannot save the entire output to a csv using the lines below. You will need additional steps and functions.
 ```{r}
+# save results to an object
 results = sum.mod$coefficients
 
+# make the object into a dataframe so it is delimited
+# try it without as.data.frame to see what I mean
 out = as.data.frame(results)
 
-write.csv(out,"ModelCoefficients.csv") # this is an excel file you can also write to a text file using write.table() and .txt file name instead of csv
+# Write to a csv file 
+write.csv(out,"ModelCoefficients.csv")  
+
+# You can also write to a text file using write.table() and .txt file name instead of csv
 
 ```
 
-Let's plot this relationship and some diagnostics of the fit to the model.
+Let's plot the diagnostics of the model fit to the data.`plot(linearmodel)` produces 4 main plots; each used to diagnose the fit of the model to the data.
 ```{r}
-# tiff("ModelDiagnostics.tiff") # Remember you can save this graphic
-par(mfrow=c(2,2)) # set up how we want them to be plotted: 2 rows 2 columns
+# Remember you can save this graphic by uncommenting the line below
+# be sure to use dev.off after to reset things
+
+# tiff("ModelDiagnostics.tiff")
+# The graphing format: 2 rows 2 columns
+par(mfrow=c(2,2)) 
+
+# type dev.off and run the next line without this function to see what happens
 plot(SpeciesA.lm)
-dev.off()  # close the plotting window and resets things
+
+# close the plotting window and resets things
+dev.off()  
 ```
-This produces 4 main plots each used to diagnose the fit of the model to the data.
+
 
 # Automation
-Let' say you now need to do this for the two other species, nobody wants to write all that code out again. Now we will build our own function and if there is time we will loop through and analyze the data for all of the species with the click of a button.
+This is the part that is similar to what was in the introduction slides.
 
-# Functions
+Let's say you now need to do this for two other species, nobody wants to write all that code out again! 
+
+Now we will build our own function and if there is time we will loop through and analyze the data for all of the species, with the click of a button.
+
+## Functions
 Just like `plot()`, `header()`, `summary()`, `dim()`, etc. are all functions, we can make our own functions too.
 Why do we make functions?
 
-1.There is no available function to do what you want to do.
+1.There are no available functions to do what you want to do.
 
 2.Work smarter -- not harder! You have a task that needs to be repeated, and you do not want to keep writing the same lines of code over and over again.
 
@@ -255,9 +299,12 @@ func.name = function(arg1,arg2)
 
 Let's do the following in a function:
 1. Select the species of interest
-2. Produce plots exploring the response vs the explanatory variables
-4. Fit the full linear model and export a table
-5. Plot the diagnostics
+
+2. Produce and save plots exploring the response vs the explanatory variables
+
+3. Fit the linear model and export a table
+
+5. Plot and save the diagnostics
 
 ```{r, eval=TRUE}
 do.analysis = function(species.name = "B", input.data = data)
@@ -276,10 +323,10 @@ do.analysis = function(species.name = "B", input.data = data)
   
   # Fit the model and save some of the results
   final.mod = lm(growth~daylength+temp_range,data = species.data)
-  sum.mod = summary(final.mod)
-  results = sum.mod$coefficients
-  out = as.data.frame(results)
-  write.csv(out,"ModelCoefficeints.csv")
+  
+  # Notice we did this earlier but with more lines
+  out = as.data.frame(final.mod$coefficients)
+  write.csv(out,"ModelCoefficients.csv")
   
   # Plot and save the diagnostics
   tiff("modeldiagnostics.tiff")
@@ -295,19 +342,19 @@ do.analysis = function(species.name = "B", input.data = data)
 do.analysis("A",data)
 ```
 
-#  For Loops
-There are various types of loops but "for" loops are most common. You use loops when you want to do something iteratively. For loops have the following structure:
+##  For Loops
+There are two types of loops you will see most often in someones R code. For loops and While Loops. You use loops when you want to do something iteratively. For loops have the following structure:
 ```{r, eval = FALSE}
 for (i in 0:5) # a variable and range of values it will take
   { # a bracket to start
    
-  #some calculation or function to do something
+  #some calculation or function to do something iteratively
   
   } # a bracket to end the for loop
 ```
 Here "i" sequentially becomes a number from 0 to 5 and is used in each iteration of the loop.
 
-Let's try a simple example where we want to add i to 5. Our output should consist of a list of values. We'll use the `cat()` function so we can see what the loop is doing. 
+Let's try a simple example where we want to add i to 5. Our output should consist of a vector of values from 5 to 10. We'll use the `cat()` function so we can see what the loop is doing. 
 ```{r}
 for (i in 0:5) 
   {
@@ -315,8 +362,9 @@ for (i in 0:5)
   
   cat(x) # see what happens if you take this out
   
-  # I like to print what I am doing inside of a loop ... 
-  # uncomment the next line to see what it does
+  # I like to make detailed statements 
+  # about what I am doing inside of a loop ... 
+  # uncomment the next line and run the loop again to see what it does
   
   # cat(paste("i= ", i, "and i + 5 =", x,"\n")) 
   
@@ -324,7 +372,8 @@ for (i in 0:5)
 ```
 
 **Now for the ultimate test**
-Use what we have learned so far to perform the analyses function on each species by using a loop.
+
+Use what we have learned so far to perform the created function on each species by using a loop.
  
 ```{r,warning=FALSE}
 
@@ -332,17 +381,36 @@ species.list = c("A","B","C") # vector of species names to loop through
 
 for (i.species in 1:length(species.list))
 {
-  # i.species = 1 # test to see if your loop is working, it should change the current.species object
-  current.species = species.list[i.species] # good practice to set an object name once and use it in multiple places
-  dir.create(current.species) # create a new folder to work in or else things will overwrite because they have the same name
-  setwd(current.species) # work in the newly created directory
-  dir()
-  do.analysis(current.species,data) # use the function we created previously
-  setwd("..") # move back to the main folder to restart the loop
-}
+  
+  # I like to have a test object to see if my loop is working
+  # I comment it out before I run the full loop
+  # It should change the current.species object
+  
+  # i.species = 1 # test
+  
+  # It is good practice to set an object name once 
+  # and use it in multiple places
+  current.species = species.list[i.species] 
+  
+  # create a new folder to work in 
+  # or else things will overwrite because they have the same name
+  dir.create(current.species) 
+  
+  # work in the newly created directory 
+  setwd(current.species) 
+  
+  # use the function we created previously
+  do.analysis(current.species,data) 
+  
+  # move back to the main folder to restart the loop
+  setwd("..") 
+  
+} # End Species Loop
 ```
 
 # Final ProTips
-1. Comment your code! ( Use the hashtag # )
+1. Comment your code! ( Use the hashtag - # )
 2. R is case-sensitive. For example, "head()" is not the same as "Head()." 
 3. Be smart when naming files, folders, etc.. You will be looking for them later. Adding the date or sequential numbers to a folder name is helpful.
+4. Debugging is the hardest part. Copy the error you get and google it. The [Stack Overflow](https://stackoverflow.com/) community will be your best friend.
+5. There are a million ways to skin a cat! What I showed you here is only one way of using R to do the things we want to do. Find what works for you.
