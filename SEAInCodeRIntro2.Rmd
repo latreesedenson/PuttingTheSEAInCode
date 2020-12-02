@@ -412,5 +412,5 @@ for (i.species in 1:length(species.list))
 1. Comment your code! ( Use the hashtag - # )
 2. R is case-sensitive. For example, "head()" is not the same as "Head()." 
 3. Be smart when naming files, folders, etc.. You will be looking for them later. Adding the date or sequential numbers to a folder name is helpful.
-4. Debugging is the hardest part. Copy the error you get and google it. The [Stack Overflow](https://stackoverflow.com/) community will be your best friend.
+4. Debugging is the hardest part. Copy the error you get and google it. The [Stack Overflow](https://stackoverflow.com) community will be your best friend.
 5. There are a million ways to skin a cat! What I showed you here is only one way of using R to do the things we want to do. Find what works for you.
