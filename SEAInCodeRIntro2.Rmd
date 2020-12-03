@@ -1,11 +1,11 @@
 ---
-title: 'PuttingTheSEAInCode'
+title: "PuttingTheSEAInCode"
 author: "Chante Davis PhD & LaTreese Denson"
 date: "12/04/2020"
-output: 
+output:
   html_document:
-    toc_float: true
-    toc: true
+    toc_float: yes
+    toc: yes
     toc_depth: 2
 ---
 
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - Provide graphs and tables to summarize findings.
 - Create a function to automate your analyses.
 
-## Prerequisits:
+## Prerequisites:
 You should have [R](https://cran.r-project.org) and [Rstudio](https://www.rstudio.com/products/rstudio/) installed. We will be working with R within the Rstudio application.
 
 # R script Setup

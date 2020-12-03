@@ -1573,8 +1573,8 @@ div.tocify {
 <li>Create a function to automate your analyses.</li>
 </ul>
 </div>
-<div id="prerequisits" class="section level2">
-<h2>Prerequisits:</h2>
+<div id="prerequisites" class="section level2">
+<h2>Prerequisites:</h2>
 <p>You should have <a href="https://cran.r-project.org">R</a> and <a href="https://www.rstudio.com/products/rstudio/">Rstudio</a> installed. We will be working with R within the Rstudio application.</p>
 </div>
 <div id="r-script-setup" class="section level1">
@@ -1608,11 +1608,15 @@ setwd(todays.file)</code></pre>
 <p><strong>ProTip:</strong> R does not like spaces. Use underscores instead.</p>
 <p>Check to see if you are in the right place using <code>getwd()</code>, then use the function <code>dir()</code> to see what is in the folder.</p>
 <pre class="r"><code>dir()</code></pre>
-<pre><code>## [1] &quot;growth_data.csv&quot;          &quot;Labs to pull from&quot;       
-## [3] &quot;MultiRegDataSimulation.R&quot; &quot;NewScript.png&quot;           
-## [5] &quot;Rstudio.png&quot;              &quot;RstudioAnnotated.png&quot;    
-## [7] &quot;RstudioAnnotated.pptx&quot;    &quot;SEAInCodeRIntro2.html&quot;   
-## [9] &quot;SEAInCodeRIntro2.Rmd&quot;</code></pre>
+<pre><code>##  [1] &quot;A&quot;                        &quot;B&quot;                       
+##  [3] &quot;boxplot_daylength.tiff&quot;   &quot;boxplot_temp.tiff&quot;       
+##  [5] &quot;C&quot;                        &quot;growth_data.csv&quot;         
+##  [7] &quot;Labs to pull from&quot;        &quot;ModelCoefficients.csv&quot;   
+##  [9] &quot;modeldiagnostics.tiff&quot;    &quot;MultiRegDataSimulation.R&quot;
+## [11] &quot;NewScript.png&quot;            &quot;Rstudio.png&quot;             
+## [13] &quot;RstudioAnnotated.png&quot;     &quot;RstudioAnnotated.pptx&quot;   
+## [15] &quot;SEAInCodeRIntro2.html&quot;    &quot;SEAInCodeRIntro2.log&quot;    
+## [17] &quot;SEAInCodeRIntro2.Rmd&quot;     &quot;SEAInCodeRIntro2.tex&quot;</code></pre>
 <p><strong>ProTip:</strong> There will be nothing in your directory if you created a new folder to work in. Messed up? Want to move up one directory? No problem! Run <code>setwd(&quot;..&quot;)</code> to move up a folder level.</p>
 <p>Now save your script. R will often hold your place but it is good to save periodically. When you close Rstudio it will ask if you want to save your R space. This will save everything in the global environment. I tend not to save it since I probably saved all of the output I needed before deciding to close R.</p>
 </div>
