@@ -48,9 +48,9 @@ R is a popular language: concepts apply to all coding/automation
 <div class ="centered"><div class = "blue"><b>
 * Efficiency   
 
-* *Accuracy   
+ *Accuracy   
 
-* *Reproducibility  
+ *Reproducibility  
 
 </div></b>
  </font>
