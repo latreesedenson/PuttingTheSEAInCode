@@ -15,7 +15,7 @@ widescreen: false
 * Resources for learning R  
 * Lets code!
 
-<div class ="centered"
+<div class ="centered">
 ```{r, out.width = "40%", echo=FALSE}
 knitr::include_graphics("HowIFeelWhenCodeWorks.jpg")
 ```
