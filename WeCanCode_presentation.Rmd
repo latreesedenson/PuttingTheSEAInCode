@@ -42,7 +42,6 @@ R is a popular language: concepts apply to all coding/automation
 </font>
 
 ## The What and Why of R
-
 <br>
 <font size="6.5">Why code? I'm not running fancy models...  
  
@@ -130,9 +129,17 @@ RStudio Cheat Sheets [here](https://www.rstudio.com/resources/cheatsheets/)
 ## 
 
 <div class="centered">
-<font size="6.5",div class = "blue">Lets Code!
+<font size="8.5">PuttingtheSEAinCode  
+<br>
+<font size="5.5">The dataset we will be working with is about the effect of daylength on several species.
+Follow along with these [instructions](https://latreesedenson.github.io/PuttingTheSEAInCode/SEAInCodeRIntro2.html)
+</div></b>
 
+1) use the comments to ask questions Chante will be monitoring to help with questions
+2) use the "raise hand" feature to ask a question to all
 
-
+<br>
+<div class = "centered">
+<font size="8.5"> Lets Code!
 
 </div>
