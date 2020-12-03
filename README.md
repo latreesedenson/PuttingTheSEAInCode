@@ -4,7 +4,9 @@ This repository holds the materials for the [#BlackInMarineScience](https://blac
 If you plan to participate in #PuttingTheSEAIncode, and have not done so already please download [R](https://cran.r-project.org/mirrors.html) and [Rstudio](https://www.rstudio.com/products/rstudio/). You will need both programs. Since this is an interactive workshop you will get the most out of it if these programs are installed prior to the start of the workshop.
 
 If at anytime you lose track of where we are in the workshop please use the links below to follow along:
+
 1) The introduction slides [here](WeCanCode_presentation_copy.html)
+
 2) Follow the R coding portion using the instructions [here](SEAInCodeRIntro2.html)
 
 If you have any questions after the workshop feel free to email us: latreese.denson@gmail.com and/or davis.chanted@gmail.com. 
