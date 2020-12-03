@@ -1,36 +1,37 @@
 ---
 title: "PuttingTheSEAinCode"
 author: "Chante Davis PhD and LaTreese Denson"
-date: "11/16/2020"
+date: "12/04/2020"
 output: ioslides_presentation
 widescreen: false  
    
 ---
 
-## Doing more with R
+## Doing More With R: Reclaim your time!
 <br>
 <div class = "blue">
 * What is R  
-* Installing R  
-* More than data  
+* More than data...  
 * Resources for learning R  
-* Lets code a little
+* Lets code!
 
+<div class ="centered"
 ```{r, out.width = "40%", echo=FALSE}
 knitr::include_graphics("HowIFeelWhenCodeWorks.jpg")
 ```
 </div></b>
 </font>
 
-## The what and why of R
+## The What and Why of R
 <font size="5.5">
 R is a popular language: concepts apply to all coding/automation
 
   <div class = "blue">
    * A set of instructions to complete tasks  
    * FREE!  
-   * Packages for many actions:  
-       - Data processing and Visualization  
+   * Packages for many actions
+   * More than Data Processing!
+       - Visualization  
        - Slides for presentations  
        - Text for articles, memos, reports  
        - Websites
@@ -40,36 +41,22 @@ R is a popular language: concepts apply to all coding/automation
 </div></b>
 </font>
 
-## Many uses for R beyond the analysis of data 
-<br>
-* Install R: [here](https://cran.rstudio.com/)
-
-* Install RStudio:[here](https://www.rstudio.com/products/rstudio/hownload/)
-
-<div class="centered"><b>
-```{r, out.width = "60%", figure.height = "60%", out.extra='style="background-color: #0055A4; padding:2px;"', echo = FALSE}
-
-knitr::include_graphics("Rstudio.png")
-
-```
-
-</div></b>
-</font>
-
-## The what and why of R
+## The What and Why of R
 
 <br>
 <font size="6.5">Why code? I'm not running fancy models...  
  
 <div class ="centered"><div class = "blue"><b>
-* Efficiency  
-* Accuracy   
-* Reproducibility  
+* Efficiency   
+
+* *Accuracy   
+
+* *Reproducibility  
 
 </div></b>
  </font>
 
-## Improving Effeciency on repetitive tasks
+## Improving Efficiency on Repetitive Tasks
 <br>
 <div class="centered">
 ```{r, out.width = "70%", figure.height = "60%", out.extra='style="background-color: #0055A4; padding:2px;"', echo = FALSE}
@@ -100,7 +87,7 @@ do.analysis = function(species.name = "B", input.data = data)
 do.analysis("C",data)
 ```
 
-## The 'meta' moment
+## The 'meta' Moment
 
 <div class="centered"><b>
 You've been looking at a simple R markdown presentation this entire time 
@@ -127,9 +114,9 @@ knitr::include_graphics("OurCodingClubCapture.PNG")
 [Our Coding Club ](https://ourcodingclub.github.io/)
 
 
-## Skill building
-
-An introduction to R [here](https://cran.r-project.org/doc/manuals/r-release-R-intro.pdf)
+## Skill Building
+<div class ="centered">
+An Introduction to R [here](https://cran.r-project.org/)
 
 R for Data Science [here](http://r4ds.had.co.nz/)
 
@@ -140,7 +127,12 @@ RStudio Cheat Sheets [here](https://www.rstudio.com/resources/cheatsheets/)
 [StackOverflow](https://stackoverflow.com/questions/tagged/r)
 
 
-## Lets Code!
+## 
+
+<div class="centered">
+<font size="6.5",div class = "blue">Lets Code!
+
+
 
 
 </div>
