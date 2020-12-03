@@ -5,9 +5,9 @@ If you plan to participate in #PuttingTheSEAIncode, and have not done so already
 
 If at anytime you lose track of where we are in the workshop please use the links below to follow along:
 
-1) The introduction slides [here](WeCanCode_presentation_copy.html)
+1) The introduction slides [here](WeCanCode_presentation_copy.html).
 
-2) Follow the R coding portion using the instructions [here](SEAInCodeRIntro2.html)
+2) Follow the R coding portion using the instructions [here](SEAInCodeRIntro2.html).
 
 If you have any questions after the workshop feel free to email us: latreese.denson@gmail.com and/or davis.chanted@gmail.com. 
 
