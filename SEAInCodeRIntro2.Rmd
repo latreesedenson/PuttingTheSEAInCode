@@ -29,7 +29,7 @@ Become familiar with the R studio layout:
 ![Rstudio Layout](RstudioAnnotated.png)
 
 Determine which directory you are in. The results of your code will print to the console:
-```{r, echo = TRUE}
+```{r, eval = FALSE}
 getwd()
 ```
 
